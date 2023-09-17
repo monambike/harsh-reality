@@ -1,4 +1,4 @@
-public static class CharacterStats
+public static class PlayerStats
 {
     public static float speed = 15f;
 }

@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class CharacterJump : MonoBehaviour
+public class PlayerJump : MonoBehaviour
 {
     private float jumpForce = 10f;
 
-    private bool isGrounded;
+    public bool isGrounded;
     private bool canDoubleJump;
 
     public LayerMask groundLayer;
@@ -14,26 +14,26 @@ public class CharacterJump : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        //// Check if the character is on the ground or touching a surface
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-
         // Handle regular jump
         if (isGrounded && Input.GetButtonDown("Jump"))
         {
             Jump();
         }
 
-        //// Handle double jump
-        //if (!isGrounded && canDoubleJump && Input.GetButtonDown("Jump"))
-        //{
-        //    DoubleJump();
-        //}
+        // Handle double jump
+        if (!isGrounded && canDoubleJump && Input.GetButtonDown("Jump"))
+        {
+            Jump();
+            canDoubleJump = isGrounded;
+        }
+
+        transform.Translate(Vector3.forward)
     }
 
     private void Jump()
@@ -47,14 +47,17 @@ public class CharacterJump : MonoBehaviour
         canDoubleJump = true;
     }
 
-    private void DoubleJump()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        // Checks if the character is collided with the groud
+        isGrounded = collision.gameObject.CompareTag("Ground");
+        canDoubleJump = isGrounded;
+    }
 
-        // Apply double jump force
-        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-
-        // Disable double jump until the character lands on the ground again
-        canDoubleJump = false;
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        // Since the character already stop colliding with the ground
+        // makes it false
+        isGrounded = false;
     }
 }

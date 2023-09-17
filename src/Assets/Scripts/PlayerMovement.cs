@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CharacterMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     void Start()
     {
@@ -16,7 +16,7 @@ public class CharacterMovement : MonoBehaviour
     {
         float horizontalInput = Input.GetAxis("Horizontal");
 
-        float this_speed = CharacterStats.speed;
+        float this_speed = PlayerStats.speed;
         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
             this_speed *= 2;
          transform.Translate(horizontalInput * this_speed * Time.deltaTime * Vector2.right);

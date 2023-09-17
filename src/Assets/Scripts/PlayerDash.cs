@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterDash : MonoBehaviour
+public class PlayerDash : MonoBehaviour
 {
     private float[] lastKeyPressTime = new float[4];
 
@@ -26,7 +26,7 @@ public class CharacterDash : MonoBehaviour
     {
         InflictBodyDamage();
 
-        float dashSpeed = CharacterStats.speed * 2f; // Adjust the dash speed as needed
+        float dashSpeed = PlayerStats.speed * 2f; // Adjust the dash speed as needed
 
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
