@@ -43,6 +43,8 @@ public class PlayerJump : MonoBehaviour
 
         // Allow for double jump after regular jump
         canDoubleJump = true;
+
+        // When jumping you win an additional dash or parry
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
