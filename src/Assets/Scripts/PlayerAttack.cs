@@ -51,7 +51,7 @@ public class PlayerAttack : MonoBehaviour
         // Damage them
         foreach(Collider2D enemy in hitEnemies)
         {
-            Debug.Log(@"We hit """ + enemy.name + @"");
+            Debug.Log(@"We hit """ + enemy.name + @"""");
         }
         attacking = true;
     }

@@ -9,23 +9,39 @@ public class PlayerDash : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.L))
         {
-            int keyIndex = GetKeyIndex();
+            Parry();
 
-            var timeSinceLastKeyPress = Time.time - lastKeyPressTime[keyIndex];
-            if (timeSinceLastKeyPress < 0.2f) // Adjust the time threshold as needed
-                Dash();
-
-            lastKeyPressTime[keyIndex] = Time.time;
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+            {
+                Dashing();
+            }
         }
     }
 
-    private void Dash()
+    private void Parry()
     {
-        InflictBodyDamage();
+        EnemyAttackParryAnimation();
+    }
 
+    private Material originalMaterial;
+    private Material dashMaterial;
+    private float dashDuration = 0.2f;
+    private void EnemyAttackParryAnimation()
+    {
+        // Store the original material
+        originalMaterial = GetComponent<Renderer>().material;
+
+        // Apply the dash material
+        GetComponent<Renderer>().material = dashMaterial;
+
+        // Start the coroutine to revert the material color after the specified duration
+        StartCoroutine(RevertMaterialColorAfterDelay(dashDuration));
+    }
+
+    private void Dashing()
+    {
         float dashSpeed = PlayerStats.speed * 2f; // Adjust the dash speed as needed
 
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -49,21 +65,6 @@ public class PlayerDash : MonoBehaviour
         // Add any additional logic or effects for the dash
     }
 
-    private Material originalMaterial;
-    private Material dashMaterial;
-    private float dashDuration = 0.2f;
-    private void InflictBodyDamage()
-    {
-        // Store the original material
-        originalMaterial = GetComponent<Renderer>().material;
-
-        // Apply the dash material
-        GetComponent<Renderer>().material = dashMaterial;
-
-        // Start the coroutine to revert the material color after the specified duration
-        StartCoroutine(RevertMaterialColorAfterDelay(dashDuration));
-    }
-
     private IEnumerator RevertMaterialColorAfterDelay(float delay)
     {
         // Wait for the specified delay
@@ -71,22 +72,5 @@ public class PlayerDash : MonoBehaviour
 
         // Revert back to the original material
         GetComponent<Renderer>().material = originalMaterial;
-    }
-
-    private int GetKeyIndex()
-    {
-        Dictionary<KeyCode, int> keyToIndex = new Dictionary<KeyCode, int>()
-        {
-            { KeyCode.W, 0 },
-            { KeyCode.A, 1 },
-            { KeyCode.S, 2 },
-            { KeyCode.D, 3 }
-        };
-
-        foreach (var pair in keyToIndex)
-            if (Input.GetKeyDown(pair.Key))
-                return pair.Value;
-
-        return -1; // Invalid key
     }
 }
