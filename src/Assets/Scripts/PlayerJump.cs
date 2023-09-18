@@ -32,8 +32,6 @@ public class PlayerJump : MonoBehaviour
             Jump();
             canDoubleJump = isGrounded;
         }
-
-        transform.Translate(Vector3.forward)
     }
 
     private void Jump()

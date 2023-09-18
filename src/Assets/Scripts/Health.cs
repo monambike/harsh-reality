@@ -1,12 +1,22 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
     public int health = 3;
     public int MAX_HEALTH = 3;
 
+    public Image[] hearts;
+    public Sprite fullHeart;
+    public Sprite emptyHeart;
+
     private void Update()
     {
+        for(int hearth = 0; hearth < hearts.Length; hearth++)
+        {
+            hearts[hearth].enabled = hearth < MAX_HEALTH;
+        }
+
         if (health <= 0)
         {
             throw new System.ArgumentOutOfRangeException("You are dead");
