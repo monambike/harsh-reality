@@ -1,2 +1,3 @@
 # unity-2d-game
-My first unity 2d game.
+
+This is a prototype of my first unity 2d game.
