@@ -1,4 +1,4 @@
-# UNITY 2D GAME
+# HARSH REALITY
 
 My first unity 2d game focusing on combat and ambient with purple colors. Starring as the main character Emma.
 
