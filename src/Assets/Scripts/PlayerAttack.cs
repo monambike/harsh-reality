@@ -3,9 +3,9 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     private GameObject attackArea = default;
+    private float attackSpeed = default;
 
     private bool attacking = false;
-    private float attackSpeed = 0.25f;
     private float timer = 0f;
 
     public Animator animator;
