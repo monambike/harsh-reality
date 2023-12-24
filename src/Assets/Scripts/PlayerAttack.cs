@@ -23,12 +23,19 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyUp(KeyCode.J))
-        {
-            Attack();
-        }
+        if (Input.GetButtonDown("PrimaryAttack"))
+            PrimaryAttack();
 
-        if (attacking)
+
+        if (Input.GetButtonDown("SecondaryAttack"))
+            SecondaryAttack();
+
+        if (Input.GetButtonDown("DefensiveAbility"))
+            DefensiveAbility();
+
+        if (Input.GetButtonDown("Ultimate"))
+
+            if (attacking)
         {
             timer += Time.deltaTime;
 
@@ -40,8 +47,10 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    private void Attack()
+    private void PrimaryAttack()
     {
+        Debug.Log("Has used PrimaryAttack");
+
         // Play attack animation
         //animator.SetTrigger("Attack");
 
@@ -55,6 +64,22 @@ public class PlayerAttack : MonoBehaviour
         }
         attacking = true;
     }
+
+    private void SecondaryAttack()
+    {
+        Debug.Log("Has used SecondaryAttack");
+    }
+
+    private void DefensiveAbility()
+    {
+        Debug.Log("Has used DefensiveAbility");
+    }
+
+    private void Ultimate()
+    {
+        Debug.Log("Has used Ultimate");
+    }
+
 
     private void OnDrawGizmosSelected()
     {

@@ -5,7 +5,6 @@ public class PlayerJump : MonoBehaviour
     private float jumpForce = 10f;
 
     public bool isGrounded;
-    private bool canDoubleJump;
 
     public LayerMask groundLayer;
     public Transform groundCheck;
@@ -21,16 +20,9 @@ public class PlayerJump : MonoBehaviour
     void Update()
     {
         // Handle regular jump
-        if (isGrounded && Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
             Jump();
-        }
-
-        // Handle double jump
-        if (!isGrounded && canDoubleJump && Input.GetButtonDown("Jump"))
-        {
-            Jump();
-            canDoubleJump = isGrounded;
         }
     }
 
@@ -40,18 +32,12 @@ public class PlayerJump : MonoBehaviour
 
         // Apply jump force
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-
-        // Allow for double jump after regular jump
-        canDoubleJump = true;
-
-        // When jumping you win an additional dash or parry
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // Checks if the character is collided with the groud
         isGrounded = collision.gameObject.CompareTag("Ground");
-        canDoubleJump = isGrounded;
     }
 
     private void OnCollisionExit2D(Collision2D collision)

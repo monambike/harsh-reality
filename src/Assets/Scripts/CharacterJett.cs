@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Jett : MonoBehaviour
+public class CharacterJett : MonoBehaviour
 {
     static int currentMaxKnifeAmount = 7;
     List<Knife> knives = new List<Knife>();
