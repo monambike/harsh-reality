@@ -1,24 +1,31 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    void Start()
+    private Vector2 movement;
+    private Rigidbody2D rb;
+
+    private void Awake()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
+    private void OnMovement(InputValue inputValue)
     {
-        Walk();
+        movement = inputValue.Get<Vector2>();
     }
 
-    private void Walk()
+    private void FixedUpdate()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
+        int speed = 5;
+        rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
+    }
 
-        float this_speed = PlayerStats.speed;
-        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
-            this_speed *= 2;
-         transform.Translate(horizontalInput * this_speed * Time.deltaTime * Vector2.right);
+    private float horizontal;
+
+    public void Move(InputAction.CallbackContext callbackContext)
+    {
+        horizontal = callbackContext.ReadValue<Vector2>().x;
     }
 }
