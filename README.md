@@ -1,3 +1,8 @@
+<img alt="Static Badge" src="https://img.shields.io/badge/MONAMBIKE-%236c00fa?style=for-the-badge&label=MADE%20BY&labelColor=%23050505"> <img alt="Static Badge" src="https://img.shields.io/badge/CC--BY--4.0%20license-%236c00fa?style=for-the-badge&label=LICENSE&labelColor=%23050505">
+
+![Unity](https://img.shields.io/badge/unity-%23000000.svg?style=for-the-badge&logo=unity&logoColor=white)
+![C#](https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=csharp&logoColor=white)
+
 # HARSH REALITY
 
 Harsh reality is a game that will make you see that things are not the way we want.
